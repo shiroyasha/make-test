@@ -5,7 +5,7 @@ endif
 let g:loaded_make_test = 1
 
 function MakeTestFileLine()
-  let path=@%
+  let path=RelativePath(@%)
   let lineNumber=line('.') + 1
 
   let cmd="make test FILE=".path.':'.lineNumber
@@ -22,7 +22,7 @@ function MakeTestFileLine()
 endfunction
 
 function MakeTestFile()
-  let path=@%
+  let path=RelativePath(@%)
 
   let cmd="make test FILE=".path
 
@@ -35,6 +35,14 @@ function MakeTestFile()
   " switch back to last window
   au BufDelete <buffer> wincmd p
   startinsert
+endfunction
+
+function! RelativePath(filepath)
+  let l:absolute_path = fnamemodify(a:filepath, ':p')
+  let l:cwd = getcwd()
+  let l:rel_path = substitute(l:absolute_path, '^' . l:cwd . '/', '', '')
+
+  return l:rel_path
 endfunction
 
 command! -bar MakeTestFileLine call MakeTestFileLine()
