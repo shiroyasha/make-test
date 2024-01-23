@@ -8,7 +8,7 @@ function MakeTestFileLine()
   let path=RelativePath(@%)
   let lineNumber=line('.') + 1
 
-  let cmd="make test FILE=".path.':'.lineNumber
+  let cmd="make -s test FILE=".path.':'.lineNumber
 
   " start new dialog on the bottom
   execute "botright" . ' new'
@@ -24,7 +24,7 @@ endfunction
 function MakeTestFile()
   let path=RelativePath(@%)
 
-  let cmd="make test FILE=".path
+  let cmd="make -s test FILE=".path
 
   " start new dialog on the bottom
   execute "botright" . ' new'
