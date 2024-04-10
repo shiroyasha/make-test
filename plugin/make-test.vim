@@ -1,17 +1,19 @@
-if exists('g:loaded_make_test')
+if exists('g:make_test_loaded')
   finish
 endif
 
-let g:loaded_make_test = 1
+let g:make_test_loaded = 1
+let g:make_test_dialog_position = 'botright' " top, topleft, topright, bottom, bottomleft, bottomright
+let g:make_test_command_pattern = 'make -s test FILE=%s'
 
 function MakeTestFileLine()
   let path=RelativePath(@%)
   let lineNumber=line('.') + 1
 
-  let cmd="make -s test FILE=".path.':'.lineNumber
+  let cmd=sprintf(g:make_test_command_pattern, path . ':' . lineNumber)
 
   " start new dialog on the bottom
-  execute "botright" . ' new'
+  execute g:make_test_dialog_position . ' new'
 
   " execute command
   call termopen(cmd)
@@ -24,10 +26,10 @@ endfunction
 function MakeTestFile()
   let path=RelativePath(@%)
 
-  let cmd="make -s test FILE=".path
+  let cmd=sprintf(g:make_test_command_pattern, path)
 
   " start new dialog on the bottom
-  execute "botright" . ' new'
+  execute g:make_test_dialog_position . ' new'
 
   " execute command
   call termopen(cmd)
