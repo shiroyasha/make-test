@@ -3,10 +3,10 @@ if exists('g:make_test_loaded')
 endif
 
 let g:make_test_loaded = 1
-let g:make_test_dialog_position = 'botright' " top, topleft, topright, bottom, bottomleft, bottomright
+let g:make_test_dialog_position = 'botright' " top, topleft, topright, bottom, bottomleft, bottomright, tab
 let g:make_test_command_pattern = 'make -s test FILE=%s'
 
-function MakeTestFileLine()
+function! MakeTestFileLine()
   let path=RelativePath(@%)
   let lineNumber=line('.') + 1
 
@@ -23,7 +23,7 @@ function MakeTestFileLine()
   startinsert
 endfunction
 
-function MakeTestFile()
+function! MakeTestFile()
   let path=RelativePath(@%)
 
   let cmd=printf(g:make_test_command_pattern, path)
@@ -39,7 +39,19 @@ function MakeTestFile()
   startinsert
 endfunction
 
-function! RelativePath(filepath)
+function! MakeTestBottom()
+  let g:make_test_dialog_position = 'botright'
+endfunction
+
+function! MakeTestRight()
+  let g:make_test_dialog_position = 'right'
+endfunction
+
+function! MakeTestAsTab()
+  let g:make_test_dialog_position = 'tab'
+endfunction
+
+function! s:RelativePath(filepath)
   let l:absolute_path = fnamemodify(a:filepath, ':p')
   let l:cwd = getcwd()
   let l:rel_path = substitute(l:absolute_path, '^' . l:cwd . '/', '', '')
