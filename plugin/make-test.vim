@@ -10,7 +10,7 @@ function MakeTestFileLine()
   let path=RelativePath(@%)
   let lineNumber=line('.') + 1
 
-  let cmd=sprintf(g:make_test_command_pattern, path . ':' . lineNumber)
+  let cmd=printf(g:make_test_command_pattern, path . ':' . lineNumber)
 
   " start new dialog on the bottom
   execute g:make_test_dialog_position . ' new'
@@ -26,7 +26,7 @@ endfunction
 function MakeTestFile()
   let path=RelativePath(@%)
 
-  let cmd=sprintf(g:make_test_command_pattern, path)
+  let cmd=printf(g:make_test_command_pattern, path)
 
   " start new dialog on the bottom
   execute g:make_test_dialog_position . ' new'
