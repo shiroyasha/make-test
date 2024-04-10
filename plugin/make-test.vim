@@ -7,7 +7,7 @@ let g:make_test_dialog_position = 'botright' " top, topleft, topright, bottom, b
 let g:make_test_command_pattern = 'make -s test FILE=%s'
 
 function! MakeTestFileLine()
-  let path=RelativePath(@%)
+  let path=s:RelativePath(@%)
   let lineNumber=line('.') + 1
 
   let cmd=printf(g:make_test_command_pattern, path . ':' . lineNumber)
@@ -24,7 +24,7 @@ function! MakeTestFileLine()
 endfunction
 
 function! MakeTestFile()
-  let path=RelativePath(@%)
+  let path=s:RelativePath(@%)
 
   let cmd=printf(g:make_test_command_pattern, path)
 
