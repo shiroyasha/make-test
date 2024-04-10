@@ -3,8 +3,9 @@ if exists('g:make_test_loaded')
 endif
 
 let g:make_test_loaded = 1
-let g:make_test_dialog_position = 'botright' " top, topleft, topright, bottom, bottomleft, bottomright, tab
+let g:make_test_dialog_position = 'botright new'
 let g:make_test_command_pattern = 'make -s test FILE=%s'
+let g:make_test_auto_close = 1
 
 function! MakeTestFileLine()
   let path=s:RelativePath(@%)
@@ -18,9 +19,11 @@ function! MakeTestFileLine()
   " execute command
   call termopen(cmd)
 
-  " switch back to last window
-  au BufDelete <buffer> wincmd p
-  startinsert
+  if g:make_test_auto_close
+    " switch back to last window
+    au BufDelete <buffer> wincmd p
+    startinsert
+  endif
 endfunction
 
 function! MakeTestFile()
@@ -34,21 +37,25 @@ function! MakeTestFile()
   " execute command
   call termopen(cmd)
 
-  " switch back to last window
-  au BufDelete <buffer> wincmd p
-  startinsert
+  if g:make_test_auto_close
+    " switch back to last window
+    au BufDelete <buffer> wincmd p
+    startinsert
+  endif
 endfunction
 
 function! MakeTestBottom()
-  let g:make_test_dialog_position = 'botright'
+  let g:make_test_dialog_position = 'botright new'
 endfunction
 
 function! MakeTestRight()
-  let g:make_test_dialog_position = 'right'
+  let g:make_test_dialog_position = 'botright vnew'
+  let g:make_test_auto_close = 0
 endfunction
 
 function! MakeTestAsTab()
   let g:make_test_dialog_position = 'tab'
+  let g:make_test_auto_close = 0
 endfunction
 
 function! s:RelativePath(filepath)
