@@ -61,3 +61,6 @@ endfunction
 
 command! -bar MakeTestFileLine call MakeTestFileLine()
 command! -bar MakeTestFile     call MakeTestFile()
+command! -bar MakeTestBottom   call MakeTestBottom()
+command! -bar MakeTestRight    call MakeTestRight()
+command! -bar MakeTestAsTab    call MakeTestAsTab()
