@@ -3,7 +3,7 @@ if exists('g:make_test_loaded')
 endif
 
 let g:make_test_loaded = 1
-let g:make_test_dialog_position = 'botright new'
+let g:make_test_dialog_position = 'tab'
 let g:make_test_command_pattern = 'make -s test FILE=%s'
 let g:make_test_auto_close = 1
 
