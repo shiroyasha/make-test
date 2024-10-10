@@ -5,7 +5,7 @@ endif
 let g:make_test_loaded = 1
 let g:make_test_dialog_position = 'tab'
 let g:make_test_command_pattern = 'make -s test FILE=%s'
-let g:make_test_auto_close = 1
+let g:make_test_auto_close = 0
 
 function! MakeTestFileLine()
   let path=s:RelativePath(@%)
@@ -46,6 +46,7 @@ endfunction
 
 function! MakeTestBottom()
   let g:make_test_dialog_position = 'botright new'
+  let g:make_test_auto_close = 0
 endfunction
 
 function! MakeTestRight()
